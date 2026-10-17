@@ -1,42 +1,153 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>System Security Plan (SSP) | David Benson</title><style>:root{--p:#0f2341;--a:#c99a2e;--ink:#16223b;--muted:#5d6879;--line:#e3e7ee;--bg:#f6f7fa}
-*{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",Calibri,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
-a{color:var(--p)}.w{max-width:960px;margin:0 auto;padding:0 20px}
-header.hero{background:var(--p);color:#fff;padding:56px 0 48px}
-.hero .w{display:flex;gap:32px;align-items:center;flex-wrap:wrap}
-.hero img{width:156px;height:156px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,.9)}
-.hero h1{font-family:Georgia,"Times New Roman",serif;font-size:40px;line-height:1.1;margin:0 0 8px;letter-spacing:-.02em}
-.hero .role{font-size:19px;color:var(--a);font-weight:600;margin:0 0 10px;filter:brightness(1.35)}
-.hero .meta{color:#c9d4e6;font-size:15px;margin:0 0 18px}
-.btns{display:flex;gap:10px;flex-wrap:wrap}
-.btns a{display:inline-block;padding:9px 16px;border-radius:9px;font-weight:600;font-size:15px;text-decoration:none;background:#fff;color:var(--p)}
-.btns a.o{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
-section{padding:40px 0;border-bottom:1px solid var(--line)}section:last-of-type{border-bottom:0}
-h2{font-family:Georgia,"Times New Roman",serif;font-size:24px;margin:0 0 18px;letter-spacing:-.01em}
-.about{font-size:18px;max-width:720px;margin:0}
-.certs{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
-.cert{background:#fff;border:1px solid var(--line);border-left:4px solid var(--a);border-radius:10px;padding:12px 14px}
-.cert b{display:block}.cert span{color:var(--muted);font-size:14px}.cert .ip{color:var(--a);font-weight:600}
-.skills{display:grid;gap:14px}.skills p{margin:0}.skills b{display:inline-block;min-width:150px}
-.tags{display:inline-flex;flex-wrap:wrap;gap:6px}.tag{background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 11px;font-size:14px}
-.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-.p{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:border-color .15s,box-shadow .15s}
-.p:hover{border-color:#b9c3d3;box-shadow:0 6px 18px rgba(15,35,65,.08)}
-.p .cat{font-size:13px;font-weight:700;color:var(--a)}.p h3{margin:4px 0 8px;font-size:18px;line-height:1.3}
-.p p{margin:0 0 12px;color:var(--muted);font-size:15px;flex:1}.p .fw{font-size:13.5px;color:var(--p);font-weight:600}
+<title>System Security Plan (SSP) | David Benson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>:root{--p:#1e3a4c;--a:#0d7d72;--ink:#1c2b33;--muted:#5a6b74;--line:#dde5e8;--bg:#f4f7f8;--card:#fff;--chip:#fff;--shadow:0 10px 30px -12px rgba(15,35,65,.14)}
+[data-theme=dark]{--ink:#e8ebf2;--muted:#9aa3b5;--line:#2a3040;--bg:#0f1219;--card:#181c26;--chip:#181c26;--shadow:0 10px 30px -12px rgba(0,0,0,.5)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,"Segoe UI",Calibri,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+radial-gradient(420px 420px at 12% 8%,color-mix(in srgb,var(--a) 16%,transparent),transparent 70%),
+radial-gradient(520px 520px at 88% 22%,color-mix(in srgb,var(--p) 14%,transparent),transparent 70%),
+radial-gradient(460px 460px at 55% 95%,color-mix(in srgb,var(--a) 10%,transparent),transparent 70%);filter:blur(10px)}
+a{color:var(--p)}[data-theme=dark] a{color:color-mix(in srgb,var(--a) 80%,#fff)}
+.w{max-width:1040px;margin:0 auto;padding:0 22px}
+nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .w{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:16px;color:var(--ink);text-decoration:none}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--a))}
+.links{display:flex;gap:4px;align-items:center}
+.links a{padding:7px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-size:14.5px;font-weight:600}
+.links a:hover{color:var(--ink)}.links a.on{color:var(--ink);background:color-mix(in srgb,var(--a) 14%,transparent)}
+.icobtn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;width:36px;height:36px;display:inline-grid;place-items:center;cursor:pointer;font-size:16px;margin-left:8px}
+.burger{display:none}
+section{padding:64px 0}
+.eyebrow{font-family:"Cascadia Code","SF Mono",Consolas,monospace;font-size:13px;letter-spacing:.14em;color:var(--a);font-weight:700;margin:0 0 8px;text-transform:uppercase}
+h2{font-size:30px;margin:0 0 22px;letter-spacing:-.02em;line-height:1.2}
+.hero{padding:72px 0 40px}
+.hero .grid{display:grid;grid-template-columns:1.25fr .9fr;gap:44px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13.5px;font-weight:600;color:var(--muted);box-shadow:var(--shadow)}
+.pill .g{width:8px;height:8px;border-radius:50%;background:#22a06b}
+.hero h1{font-size:52px;line-height:1.05;margin:20px 0 10px;letter-spacing:-.03em}
+.grad{background:linear-gradient(120deg,var(--p),var(--a));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:20px;font-weight:600;color:var(--ink);margin:0 0 12px}
+.hero .about{color:var(--muted);font-size:16.5px;max-width:560px;margin:0 0 24px;white-space:pre-wrap}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btns a{display:inline-block;padding:11px 20px;border-radius:11px;font-weight:700;font-size:15px;text-decoration:none;background:linear-gradient(120deg,var(--p),var(--a));color:#fff;box-shadow:var(--shadow)}
+.btns a.o{background:transparent;color:var(--ink);border:1.5px solid var(--line);box-shadow:none}
+.photowrap{position:relative;justify-self:center}
+.photoborder{padding:10px;border-radius:26px;background:linear-gradient(140deg,var(--p),var(--a));box-shadow:var(--shadow)}
+.photoborder img{display:block;width:270px;height:270px;object-fit:cover;border-radius:18px;background:var(--card)}
+.photochip{position:absolute;bottom:-14px;left:-14px;background:var(--chip);border:1px solid var(--line);border-radius:12px;padding:8px 14px;font-size:13.5px;font-weight:700;box-shadow:var(--shadow)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow);text-align:center}
+.stat b{display:block;font-size:30px;letter-spacing:-.02em}.stat span{color:var(--muted);font-size:14px;font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+.abouttxt{font-size:17px;margin:0;white-space:pre-wrap;max-width:760px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.tag{background:color-mix(in srgb,var(--a) 10%,var(--card));border:1px solid color-mix(in srgb,var(--a) 30%,var(--line));border-radius:999px;padding:4px 13px;font-size:13.5px;font-weight:600}
+.skillgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.skillcard .tile{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:21px;background:linear-gradient(135deg,var(--p),var(--a));color:#fff;margin-bottom:12px}
+.skillcard h3{margin:0 0 10px;font-size:16.5px}
+.certs{display:grid;gap:10px;margin-top:22px}
+.cert{display:flex;justify-content:space-between;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;box-shadow:var(--shadow)}
+.cert b{display:block;font-size:15px}.cert span{color:var(--muted);font-size:13.5px}.cert .yr{font-family:Consolas,monospace;font-size:13px;color:var(--a);font-weight:700;white-space:nowrap}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.pcard{position:relative;display:block;text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s}
+.pcard:hover{transform:translateY(-3px)}
+.pcard .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.pcard .emo{font-size:26px}
+.stbadge{font-size:11.5px;font-weight:800;letter-spacing:.06em;border-radius:999px;padding:3px 10px}
+.stbadge.done{background:color-mix(in srgb,#22a06b 18%,transparent);color:#1a7f56}
+.stbadge.prog{background:color-mix(in srgb,var(--a) 18%,transparent);color:var(--a)}
+.pcard h3{margin:0 0 8px;font-size:19px;line-height:1.3}
+.pcard .desc{margin:0 0 14px;color:var(--muted);font-size:14.5px}
+.pcard .code{position:absolute;top:18px;right:18px;color:var(--muted);font-family:Consolas,monospace;font-size:13px;border:1px solid var(--line);border-radius:8px;padding:2px 8px;background:var(--bg)}
+.tl{position:relative;margin:0;padding:0 0 0 26px;list-style:none}
+.tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--p),var(--a))}
+.tl li{position:relative;padding:0 0 26px}
+.tl li::before{content:"";position:absolute;left:-25px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--a);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--a)}
+.tl .when{font-family:Consolas,monospace;font-size:12.5px;color:var(--a);font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.tl h3{margin:2px 0 4px;font-size:17px}.tl p{margin:0;color:var(--muted);font-size:14.5px}
+.contact .btns a.o{border-color:var(--line)}
+footer{padding:34px 0 54px;color:var(--muted);font-size:13.5px;text-align:center}
 .empty{color:var(--muted)}
-footer{padding:26px 0 40px;color:var(--muted);font-size:13.5px}
-.doc header{background:var(--p);color:#fff;padding:28px 0}.doc header a{color:var(--a);text-decoration:none;font-size:14px;filter:brightness(1.35)}
-.doc header h1{font-family:Georgia,"Times New Roman",serif;margin:8px 0 4px;font-size:30px;line-height:1.2}.doc header .meta{color:#c9d4e6}
-.kv{display:grid;grid-template-columns:170px 1fr;gap:8px 16px;margin:0}.kv dt{font-weight:700}.kv dd{margin:0}
-.files a{display:flex;justify-content:space-between;gap:12px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin-bottom:8px;text-decoration:none}
-.files a span{color:var(--muted);font-size:14px}
-.prose{max-width:720px;white-space:pre-wrap;margin:0}
-@media(max-width:640px){.hero h1{font-size:31px}.hero img{width:120px;height:120px}.kv{grid-template-columns:1fr}.skills b{display:block}}</style></head><body class="doc">
-<header><div class="w"><a href="../../">&larr; David Benson</a><h1>System Security Plan (SSP)</h1><div class="meta">Cloud Security</div></div></header>
+/* project page + documents panel */
+.dochead{padding:44px 0 8px}
+.crumb{font-size:14px;text-decoration:none;font-weight:600}
+.dochead h1{font-size:38px;margin:14px 0 6px;letter-spacing:-.02em}
+.dochead .meta{color:var(--muted);font-size:15px}
+.prose{white-space:pre-wrap;margin:0;font-size:16px}
+.dtabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:16px}
+.dtabs button{border:0;background:transparent;color:var(--muted);font:inherit;font-weight:600;font-size:14px;padding:9px 13px;cursor:pointer;border-bottom:2.5px solid transparent}
+.dtabs button.on{color:var(--ink);border-bottom-color:var(--a)}
+.dtools{display:flex;gap:14px;margin-bottom:14px;font-size:14px;font-weight:600}
+.dviewer{border:1px solid var(--line);border-radius:12px;background:var(--bg);min-height:120px;overflow:hidden}
+.dviewer iframe{width:100%;height:640px;border:0;display:block;background:#fff}
+.dviewer img{max-width:100%;display:block;margin:0 auto}
+.dviewer .md,.dviewer .csvwrap{padding:22px;font-size:15px}
+.dviewer table{border-collapse:collapse;width:100%;font-size:14px}
+.dviewer th,.dviewer td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+.dviewer th{background:color-mix(in srgb,var(--a) 10%,var(--card))}
+.dlcard{padding:34px;text-align:center}
+.dlcard a{display:inline-block;margin-top:12px;padding:10px 20px;border-radius:10px;background:linear-gradient(120deg,var(--p),var(--a));color:#fff;font-weight:700;text-decoration:none}
+@media(max-width:860px){
+.hero .grid{grid-template-columns:1fr}.hero h1{font-size:38px}.skillgrid,.pgrid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}
+.links{position:fixed;top:60px;right:0;left:0;flex-direction:column;align-items:stretch;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 18px;display:none}
+.links.open{display:flex}.burger{display:inline-grid}
+}</style></head><body>
 <main class="w">
-<section class="card"><dl class="kv"><dt>Area</dt><dd>Cloud Security</dd><dt>Framework</dt><dd>FedRAMP</dd><dt>Controls</dt><dd>Continuous Monitoring, 3PAO Assessment, Shared Responsibility Matrix</dd></dl></section>
-<section class="card"><h2>What I did</h2><p class="prose">Conducted security assessment</p></section>
-<section class="card"><h2>What I learned</h2><p class="prose">How to conduct security assessment.</p></section>
-<section class="card"><h2>Deliverables</h2><div class="files"><a href="SSP_Template.docx" target="_blank" rel="noopener"><b>SSP_Template.docx</b><span>49 KB</span></a><a href="VM_Module2_Templates_Completed.xlsx" target="_blank" rel="noopener"><b>VM_Module2_Templates_Completed.xlsx</b><span>10 KB</span></a></div></section>
-</main><footer class="w">Fictional organization and sanitized data only.</footer></body></html>
+<header class="dochead"><a class="crumb" href="../../">&larr; Back to portfolio</a><h1>System Security Plan (SSP)</h1><div class="meta">Cloud Security · FedRAMP</div></header>
+<section style="padding-top:8px"><div class="tags" aria-label="Controls demonstrated"><span class="tag">Continuous Monitoring</span><span class="tag">3PAO Assessment</span><span class="tag">Shared Responsibility Matrix</span></div></section>
+<section><p class="eyebrow">What I did</p><div class="card"><p class="prose">Conducted security assessment</p></div></section>
+<section><p class="eyebrow">What I learned</p><div class="card"><p class="prose">How to conduct security assessment.</p></div></section>
+<section><p class="eyebrow">Documents</p><div class="card">
+<div class="dtabs" id="dtabs" role="tablist" aria-label="Project documents"></div>
+<div class="dtools"><a id="dopen" href="#" target="_blank" rel="noopener">Open full page</a><a id="ddl" href="#" download>Download</a></div>
+<div class="dviewer" id="dview"></div></div></section>
+<script>window.__DOCS=[{"n":"SSP_Template.docx","u":"SSP_Template.docx","k":"bin"},{"n":"VM_Module2_Templates_Completed.xlsx","u":"VM_Module2_Templates_Completed.xlsx","k":"bin"}];</script>
+<script>(function(){
+var FILES=window.__DOCS||[];if(!FILES.length)return;
+var tabs=document.getElementById("dtabs"),view=document.getElementById("dview"),openL=document.getElementById("dopen"),dlL=document.getElementById("ddl");
+function escH(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function md(src){var s=escH(src);
+s=s.replace(/^###### (.*)$/gm,"<h6>$1</h6>").replace(/^##### (.*)$/gm,"<h5>$1</h5>").replace(/^#### (.*)$/gm,"<h4>$1</h4>").replace(/^### (.*)$/gm,"<h3>$1</h3>").replace(/^## (.*)$/gm,"<h2>$1</h2>").replace(/^# (.*)$/gm,"<h1>$1</h1>");
+s=s.replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>").replace(/\*([^*]+)\*/g,"<em>$1</em>").replace(/`([^`]+)`/g,"<code>$1</code>");
+s=s.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+var lines=s.split(/\n/),out=[],inList=false;
+lines.forEach(function(l){var m=/^\s*[-*]\s+(.*)$/.exec(l);if(m){if(!inList){out.push("<ul>");inList=true;}out.push("<li>"+m[1]+"</li>");}else{if(inList){out.push("</ul>");inList=false;}if(l.trim()===""){out.push("");}else if(!/^<h\d/.test(l)){out.push("<p>"+l+"</p>");}else{out.push(l);}}});
+if(inList)out.push("</ul>");return out.join("\n");}
+function csv(src){var rows=[],row=[],cell="",q=false;
+for(var i=0;i<src.length;i++){var c=src[i];
+if(q){if(c==='"'){if(src[i+1]==='"'){cell+='"';i++;}else q=false;}else cell+=c;}
+else if(c==='"')q=true;else if(c===","){row.push(cell);cell="";}else if(c==="\n"||c==="\r"){if(c==="\r"&&src[i+1]==="\n")i++;row.push(cell);cell="";if(row.length>1||row[0]!=="")rows.push(row);row=[];}else cell+=c;}
+row.push(cell);if(row.length>1||row[0]!=="")rows.push(row);
+if(!rows.length)return"<p>Empty file.</p>";
+var h="<table><thead><tr>"+rows[0].map(function(x){return"<th>"+escH(x)+"</th>";}).join("")+"</tr></thead><tbody>";
+rows.slice(1,501).forEach(function(r){h+="<tr>"+r.map(function(x){return"<td>"+escH(x)+"</td>";}).join("")+"</tr>";});
+return h+"</tbody></table>";}
+function show(f){if(openL){openL.href=f.u;}if(dlL){dlL.href=f.u;dlL.setAttribute("download",f.n);}
+if(!view)return;
+if(f.k==="html"){view.innerHTML="";var fr=document.createElement("iframe");fr.setAttribute("sandbox","allow-scripts");fr.src=f.u;fr.title=f.n;view.appendChild(fr);return;}
+if(f.k==="pdf"){view.innerHTML='<iframe src="'+f.u+'" title="'+escH(f.n)+'"></iframe>';return;}
+if(f.k==="img"){view.innerHTML='<img src="'+f.u+'" alt="'+escH(f.n)+'">';return;}
+if(f.k==="bin"){view.innerHTML='<div class="dlcard"><p><strong>'+escH(f.n)+'</strong><br>This file type opens best in its own app.</p><a href="'+f.u+'" download="'+escH(f.n)+'">Download</a></div>';return;}
+view.innerHTML='<p style="padding:22px">Loading…</p>';
+fetch(f.u).then(function(r){if(!r.ok)throw new Error("load failed");return r.text();}).then(function(t){
+view.innerHTML=f.k==="md"?'<div class="md">'+md(t)+"</div>":'<div class="csvwrap">'+csv(t)+"</div>";
+}).catch(function(){view.innerHTML='<p style="padding:22px">Could not render this file. Use Open full page instead.</p>';});}
+FILES.forEach(function(f,i){var b=document.createElement("button");b.type="button";b.textContent=f.n;b.addEventListener("click",function(){[].slice.call(tabs.children).forEach(function(x){x.classList.remove("on");});b.classList.add("on");show(f);});tabs.appendChild(b);if(i===0){b.classList.add("on");show(f);}});
+})();</script>
+</main>
+<footer class="w">Fictional organization and sanitized data only. &middot; Built with MyProven Portfolio Builder</footer>
+<script>(function(){var d=document.documentElement;
+try{var t=localStorage.getItem("sig-theme");if(t)d.setAttribute("data-theme",t);}catch(e){}
+var tb=document.getElementById("themebtn");
+function paint(){var dk=d.getAttribute("data-theme")==="dark";if(tb)tb.textContent=dk?"\u2600\uFE0F":"\u263E\uFE0F";if(tb)tb.setAttribute("aria-label",dk?"Switch to light mode":"Switch to dark mode");}
+paint();
+if(tb)tb.addEventListener("click",function(){var dk=d.getAttribute("data-theme")==="dark";if(dk)d.removeAttribute("data-theme");else d.setAttribute("data-theme","dark");try{localStorage.setItem("sig-theme",dk?"light":"dark");}catch(e){}paint();});
+var bg=document.getElementById("burger"),ln=document.getElementById("links");
+if(bg&&ln)bg.addEventListener("click",function(){var o=ln.classList.toggle("open");bg.setAttribute("aria-expanded",o?"true":"false");});
+if(ln)ln.addEventListener("click",function(e){if(e.target.tagName==="A")ln.classList.remove("open");});
+var secs=[].slice.call(document.querySelectorAll("section[id]"));
+var as=[].slice.call(document.querySelectorAll("#links a"));
+if("IntersectionObserver" in window&&secs.length){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){as.forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+en.target.id);});}});},{rootMargin:"-40% 0px -55% 0px"});secs.forEach(function(s){io.observe(s);});}
+})();</script></body></html>
