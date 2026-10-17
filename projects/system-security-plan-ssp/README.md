@@ -2,9 +2,9 @@
 
 | | |
 |---|---|
-| **Area** | Cloud Security |
-| **Framework** | FedRAMP |
-| **Controls** | Continuous Monitoring, 3PAO Assessment, Shared Responsibility Matrix |
+| **Area** | Risk Management |
+| **Framework** | NIST RMF (SP 800-37) |
+| **Controls** | Prepare, Categorize, Select, Implement, Assess, Authorize, Monitor |
 
 ## What I did
 
