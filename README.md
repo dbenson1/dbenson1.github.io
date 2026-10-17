@@ -1,12 +1,12 @@
 # David Benson
 
-GRC | Vulnerability Management
+GRC Analyst
 
 **Live portfolio:** https://dbenson1.github.io
 
 ## Projects
 
-- [Risk Register](projects/risk-register/) · GRC · NIST 800-30
+- [System Security Plan (SSP)](projects/system-security-plan-ssp/) · Cloud Security · FedRAMP
 
 ---
 *Built with the MyProven Academy Portfolio Builder. All projects use fictional organizations and sanitized data.*
