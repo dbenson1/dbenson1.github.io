@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>System Security Plan (SSP) | David Benson</title><style>:root{--p:#2b2f36;--a:#c25a10;--ink:#e6e9f0;--muted:#9aa3b5;--line:#2c3242;--bg:#11141c}
+<title>SDIS Risk Assessment &amp; Risk Register (Healthcare SaaS) | David Benson</title><style>:root{--p:#2b2f36;--a:#c25a10;--ink:#e6e9f0;--muted:#9aa3b5;--line:#2c3242;--bg:#11141c}
 *{box-sizing:border-box}body{margin:0;font-family:"Cascadia Code","SF Mono",Consolas,"Courier New",monospace;color:var(--ink);background:var(--bg);line-height:1.6}
 a{color:var(--a)}.w{max-width:920px;margin:0 auto;padding:0 20px}
 header.hero{border-bottom:1px solid var(--line);padding:48px 0 36px}
@@ -34,10 +34,10 @@ footer{padding:24px 0 38px;color:var(--muted);font-size:13px}
 .files a span{color:var(--muted);font-size:13px}
 .prose{max-width:760px;white-space:pre-wrap;margin:0}
 @media(max-width:640px){.hero h1{font-size:26px}.hero img{width:96px;height:96px}.kv{grid-template-columns:1fr}.skills b{display:block}}</style></head><body class="doc">
-<header><div class="w"><a href="../../">&larr; David Benson</a><h1>System Security Plan (SSP)</h1><div class="meta">Risk Management</div></div></header>
+<header><div class="w"><a href="../../">&larr; David Benson</a><h1>SDIS Risk Assessment &amp; Risk Register (Healthcare SaaS)</h1><div class="meta">Risk Management</div></div></header>
 <main class="w">
-<section class="card"><dl class="kv"><dt>Area</dt><dd>Risk Management</dd><dt>Framework</dt><dd>NIST RMF (SP 800-37)</dd><dt>Controls</dt><dd>Prepare, Categorize, Select, Implement, Assess, Authorize, Monitor</dd></dl></section>
-<section class="card"><h2>What I did</h2><p class="prose">Conducted security assessment</p></section>
-<section class="card"><h2>What I learned</h2><p class="prose">How to conduct security assessment.</p></section>
-<section class="card"><h2>Deliverables</h2><div class="files"><a href="SSP_Template.docx" target="_blank" rel="noopener"><b>SSP_Template.docx</b><span>49 KB</span></a><a href="VM_Module2_Templates_Completed.xlsx" target="_blank" rel="noopener"><b>VM_Module2_Templates_Completed.xlsx</b><span>10 KB</span></a></div></section>
+<section class="card"><dl class="kv"><dt>Area</dt><dd>Risk Management</dd><dt>Framework</dt><dd>NIST SP 800-30 Rev 1</dd><dt>Controls</dt><dd>RA-3 — Risk Assessment, PM-9 — Risk Management Strategy, PM-28 — Risk Framing</dd></dl></section>
+<section class="card"><h2>What I did</h2><p class="prose">Assessed 20 risks for SDIS, a fictional moderate-impact healthcare SaaS platform that handles PHI. For each risk I identified the affected assets, threat source and weakness, scored likelihood and impact (1–5), and mapped treatment to NIST SP 800-53 Rev 5, ISO/IEC 27001:2022 Annex A and SOC 2. After treatment, Critical risks dropped from 7 to 0 and total risk score fell 52%. I also built an interactive NIST → ISO 27001 → SOC 2 crosswalk of all 298 base controls to support the mapping.</p></section>
+<section class="card"><h2>What I learned</h2><p class="prose">Inherent vs. residual scoring is what makes a register useful to leadership: it shows exactly how much risk each control investment buys down. Mapping one control set to three frameworks also showed me how a single piece of evidence can satisfy HIPAA, ISO and SOC 2 auditors at once.</p></section>
+<section class="card"><h2>Deliverables</h2><div class="files"><a href="SDIS_Risk_Register_Interactive.html" target="_blank" rel="noopener"><b>SDIS_Risk_Register_Interactive.html</b><span>28 KB</span></a><a href="NIST_ISO_SOC2_Crosswalk_Interactive.html" target="_blank" rel="noopener"><b>NIST_ISO_SOC2_Crosswalk_Interactive.html</b><span>52 KB</span></a></div></section>
 </main><footer class="w">Fictional organization and sanitized data only.</footer></body></html>

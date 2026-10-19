@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SDIS Risk Register — David Benson</title>
+<style>
+:root{--p:#241a4d;--a:#6d4fc4;--ink:#221d33;--muted:#625d75;--line:#e4e1ee;--bg:#f7f6fa;--card:#fff;
+--low:#2f9e6b;--med:#d9a21b;--high:#e06c1f;--crit:#c62f3f;--lowbg:#e3f4ec;--medbg:#fbf1d6;--highbg:#fde6d6;--critbg:#f9dcdf}
+@media (prefers-color-scheme:dark){:root{--ink:#ece9f6;--muted:#a7a1bb;--line:#35304a;--bg:#16131f;--card:#1f1b2c;--a:#9d84ee;--p:#c9bdf7;
+--lowbg:#173a2b;--medbg:#3d321a;--highbg:#3f2818;--critbg:#401c22}}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 16px 60px}
+header{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--a);font-weight:700}
+h1{margin:6px 0 6px;font-size:clamp(22px,3.4vw,32px);color:var(--p);line-height:1.2}
+.sub{color:var(--muted);margin:0;max-width:820px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tag{font-size:12px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:3px 10px;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi b{display:block;font-size:26px;color:var(--p);line-height:1.1}
+.kpi span{font-size:13px;color:var(--muted)}
+.kpi .arrow{font-size:15px;color:var(--muted);font-weight:500}
+.grid{display:grid;grid-template-columns:360px 1fr;gap:18px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.card h2{font-size:15px;margin:0 0 4px;color:var(--p)}
+.card p.hint{font-size:13px;color:var(--muted);margin:0 0 12px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.seg button{border:0;background:transparent;color:var(--muted);padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+.seg button.on{background:var(--a);color:#fff}
+.hm{display:grid;grid-template-columns:22px repeat(5,1fr);grid-template-rows:repeat(5,1fr) 22px;gap:4px;aspect-ratio:1/1}
+.hm .c{border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;cursor:pointer;border:2px solid transparent;transition:transform .12s}
+.hm .c:hover{transform:scale(1.04)}
+.hm .c.sel{border-color:var(--ink)}
+.hm .c.z{opacity:.45;cursor:default;font-weight:400}
+.hm .ax{display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted)}
+.axl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px}
+.b-low{background:var(--lowbg);color:var(--low)}.b-med{background:var(--medbg);color:var(--med)}
+.b-high{background:var(--highbg);color:var(--high)}.b-crit{background:var(--critbg);color:var(--crit)}
+.legend{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.pill{font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.bars{margin-top:16px}
+.bar{display:grid;grid-template-columns:62px 1fr 28px;gap:8px;align-items:center;font-size:13px;margin:5px 0}
+.bar i{display:block;height:9px;border-radius:9px}
+.bar .t{background:var(--line);border-radius:9px;overflow:hidden}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.tools input,.tools select{font:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.tools input{flex:1;min-width:180px}
+.chip-clear{font:inherit;font-size:13px;border:1px dashed var(--a);color:var(--a);background:transparent;border-radius:8px;padding:6px 10px;cursor:pointer}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);text-align:left;padding:8px;border-bottom:1px solid var(--line);cursor:pointer;user-select:none;white-space:nowrap}
+th[aria-sort=ascending]::after{content:" ▲"}th[aria-sort=descending]::after{content:" ▼"}
+td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr{cursor:pointer}tbody tr:hover{background:color-mix(in srgb,var(--a) 7%,transparent)}
+tbody tr.open{background:color-mix(in srgb,var(--a) 11%,transparent)}
+.rid{font-weight:700;color:var(--a);white-space:nowrap}
+.mv{white-space:nowrap;font-size:13px}
+.detail td{background:var(--bg);cursor:default;padding:16px}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 22px}
+.dgrid h4{margin:0 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.dgrid p{margin:0}
+.ctl{display:flex;flex-wrap:wrap;gap:5px}
+.ctl span{font-size:12px;border-radius:6px;padding:2px 7px;border:1px solid var(--line);background:var(--card)}
+.ctl.n span{border-color:var(--a);color:var(--a)}
+ul.act{margin:0;padding-left:18px}
+.empty{padding:24px;text-align:center;color:var(--muted)}
+details.key{margin-top:18px}
+details.key summary{cursor:pointer;font-weight:700;color:var(--p)}
+.keygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px;font-size:13px}
+.keygrid h4{margin:0 0 6px;font-size:13px}
+.keygrid div div{margin:3px 0}
+footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.btn{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}.keygrid{grid-template-columns:1fr}}
+@media (max-width:640px){
+ thead{display:none}table,tbody,tr,td{display:block;width:100%}
+ tbody tr{border:1px solid var(--line);border-radius:10px;margin-bottom:10px;padding:6px 4px;background:var(--card)}
+ td{border:0;padding:4px 8px}td[data-l]::before{content:attr(data-l)": ";color:var(--muted);font-size:12px}
+ .dgrid{grid-template-columns:1fr}.detail{border:0!important;background:none!important}
+}
+@media print{.tools,.seg,.btn,details.key summary{display:none}body{background:#fff}.card,.kpi{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div class="eyebrow">GRC work sample · Risk Assessment</div>
+ <h1>SDIS Risk Register &amp; Treatment Plan</h1>
+ <p class="sub">A complete risk register for the Secure Data Information System (SDIS), a moderate-impact healthcare SaaS platform that handles PHI. Each risk is scored for likelihood and impact, mapped to NIST SP 800-53 Rev 5, ISO/IEC 27001:2022 and SOC 2, and re-scored after treatment.</p>
+ <div class="meta">
+  <span class="tag">Prepared by David Benson</span>
+  <span class="tag">NIST SP 800-30 method</span><span class="tag">NIST 800-53 Rev 5</span><span class="tag">ISO/IEC 27001:2022</span><span class="tag">SOC 2 TSC</span>
+  <span class="tag">Fictional organization · sanitized data</span>
+  <button class="btn" onclick="window.print()">Print / save PDF</button>
+ </div>
+</header>
+
+<section class="kpis" id="kpis"></section>
+
+<div class="grid">
+ <aside class="card">
+  <h2>Risk heat map</h2>
+  <p class="hint">Likelihood × Impact. Click a cell to filter the register.</p>
+  <div class="seg" role="tablist">
+   <button class="on" data-v="inh" role="tab" aria-selected="true">Inherent</button>
+   <button data-v="res" role="tab" aria-selected="false">Residual (after treatment)</button>
+  </div>
+  <div class="hm" id="hm" aria-label="Heat map"></div>
+  <div class="axl"><span>↑ Likelihood (rows)</span><span>Impact (columns) →</span></div>
+  <div class="legend"><span class="pill b-low">Low 1–4</span><span class="pill b-med">Medium 5–9</span><span class="pill b-high">High 10–14</span><span class="pill b-crit">Critical 15–25</span></div>
+  <div class="bars" id="bars"></div>
+ </aside>
+
+ <section class="card">
+  <h2>Risk register</h2>
+  <p class="hint">Select a risk to see the threat, mapped controls and treatment actions.</p>
+  <div class="tools">
+   <input id="q" type="search" placeholder="Search risks, assets, controls (e.g. MFA, SC-28, CC6.1)…" aria-label="Search">
+   <select id="fr" aria-label="Inherent rating"><option value="">All inherent ratings</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select>
+   <select id="fo" aria-label="Risk owner"><option value="">All owners</option></select>
+   <button class="chip-clear" id="clr" hidden>Clear filters ✕</button>
+  </div>
+  <table>
+   <thead><tr>
+    <th data-k="id" aria-sort="ascending">ID</th><th data-k="risk">Risk scenario</th>
+    <th data-k="inh">Inherent</th><th data-k="res">Residual</th><th data-k="owner">Owner</th><th data-k="review">Review</th>
+   </tr></thead>
+   <tbody id="tb"></tbody>
+  </table>
+ </section>
+</div>
+
+<details class="key card">
+ <summary>Scoring key &amp; methodology</summary>
+ <div class="keygrid">
+  <div><h4>Likelihood (1–5)</h4><div>1 Rare · 2 Unlikely · 3 Possible · 4 Likely · 5 Almost certain</div>
+   <h4 style="margin-top:12px">Impact (1–5)</h4><div>1 Negligible · 2 Minor · 3 Moderate · 4 Major · 5 Severe (PHI breach, major outage, regulatory harm)</div></div>
+  <div><h4>Risk bands (L × I)</h4>
+   <div><span class="pill b-low">Low 1–4</span> Monitor / accept with review</div>
+   <div><span class="pill b-med">Medium 5–9</span> Plan treatment; track to closure</div>
+   <div><span class="pill b-high">High 10–14</span> Prioritized treatment</div>
+   <div><span class="pill b-crit">Critical 15–25</span> Immediate action; escalate</div></div>
+  <div><h4>Treatment strategies</h4>
+   <div><b>Mitigate</b> — add controls to reduce likelihood or impact</div><div><b>Transfer</b> — insurance, outsourcing, contract</div>
+   <div><b>Avoid</b> — stop or change the activity</div><div><b>Accept</b> — formally retain with sign-off</div>
+   <h4 style="margin-top:12px">Mappings</h4><div>Principal correspondences per NIST's 800-53↔ISO 27001 crosswalk and AICPA's TSC↔800-53 mapping.</div></div>
+ </div>
+</details>
+
+<footer>Fictional case study for portfolio purposes. SDIS, its assets and owners are illustrative; no real organization or data is represented. · David Benson</footer>
+</div>
+
+<script>
+const R=[{"id": "R-01", "risk": "Unauthorized access to the PHI database via stolen or weak privileged credentials", "assets": "db-prod-01 (Patient Records DB); ad-dc-01", "threat": "External attacker / credential theft", "vuln": "No phishing-resistant MFA on admin access; shared/over-privileged accounts", "existing": "AC-2, AC-6, IA-2, AU-6", "L": 4, "I": 5, "nist": "IA-2(1), AC-2, AC-5, AC-6, AU-6", "iso": "5.17, 8.2, 8.5", "soc": "CC6.1, CC6.2, CC6.3", "strategy": "Mitigate", "actions": "Enforce phishing-resistant MFA on all admin; deploy PAM/just-in-time access; remove shared accounts; enable session logging & alerting", "owner": "IT Security Lead", "rL": 2, "rI": 5, "status": "Open — mitigating", "review": "Quarterly"}, {"id": "R-02", "risk": "Ransomware encrypts production servers and halts the service", "assets": "web-prod-01; app-prod-01; db-prod-01", "threat": "Cybercriminal / malware via phishing", "vuln": "Inconsistent patching; macro-enabled email; no immutable backups", "existing": "SI-3, CP-9", "L": 4, "I": 5, "nist": "SI-2, SI-3, CP-9, CP-10, AT-2", "iso": "8.7, 8.8, 8.13", "soc": "CC7.1, CC7.2, A1.2", "strategy": "Mitigate", "actions": "Deploy EDR; enforce patch SLA; immutable/offline backups with tested restores; user awareness; email macro blocking", "owner": "Infrastructure Manager", "rL": 2, "rI": 4, "status": "Open — mitigating", "review": "Quarterly"}, {"id": "R-03", "risk": "PHI intercepted in transit due to weak/misconfigured TLS", "assets": "web-prod-01; app-prod-01; staff laptops", "threat": "Network attacker (MITM)", "vuln": "TLS misconfiguration; legacy cipher suites permitted", "existing": "SC-8", "L": 2, "I": 5, "nist": "SC-8, SC-13, SC-23", "iso": "8.24, 5.14", "soc": "CC6.7, C1.1", "strategy": "Mitigate", "actions": "Enforce TLS 1.2+ with strong ciphers; enable HSTS; disable legacy protocols; scan externally", "owner": "Infrastructure Manager", "rL": 1, "rI": 5, "status": "Open — mitigating", "review": "Semi-annual"}, {"id": "R-04", "risk": "PHI exposed through unencrypted data at rest or a lost backup copy", "assets": "db-prod-01; backup-01; AWS S3 backup", "threat": "Theft / misconfiguration", "vuln": "Data at rest not encrypted; keys poorly managed", "existing": "SC-28, MP-4", "L": 2, "I": 5, "nist": "SC-28, SC-12, MP-4, MP-6", "iso": "8.24, 7.10, 8.10", "soc": "C1.1, CC6.1", "strategy": "Mitigate", "actions": "Enable encryption at rest (DB + backups + S3); centralize key management (KMS); enforce media handling", "owner": "Data Protection Officer", "rL": 1, "rI": 5, "status": "Open — mitigating", "review": "Semi-annual"}, {"id": "R-05", "risk": "Web application compromised via injection / OWASP-class vulnerability", "assets": "web-prod-01; app-prod-01", "threat": "External attacker", "vuln": "Insecure code; no input validation; no WAF", "existing": "SI-10, SA-11", "L": 3, "I": 4, "nist": "SI-10, SA-3, SA-11, RA-5", "iso": "8.28, 8.29, 8.25", "soc": "CC7.1, CC8.1", "strategy": "Mitigate", "actions": "Add input validation; SAST/DAST in CI/CD; deploy WAF; secure SDLC & code review", "owner": "Application Owner", "rL": 2, "rI": 4, "status": "Open — mitigating", "review": "Quarterly"}, {"id": "R-06", "risk": "Insider deliberately exfiltrates PHI", "assets": "db-prod-01; app-prod-01", "threat": "Malicious insider", "vuln": "Excess privileges; no DLP; limited monitoring", "existing": "AC-6, AU-6", "L": 2, "I": 5, "nist": "AC-4, AC-6, AC-23, AU-6, PM-12", "iso": "8.3, 8.12, 5.18", "soc": "CC6.1, CC6.3", "strategy": "Mitigate", "actions": "Enforce least privilege; deploy DLP; monitor bulk access; insider-threat program; strict offboarding", "owner": "IT Security Lead", "rL": 2, "rI": 4, "status": "Open — mitigating", "review": "Quarterly"}, {"id": "R-07", "risk": "Lost or stolen remote laptop containing cached PHI", "assets": "Staff laptops (remote)", "threat": "Loss / theft", "vuln": "No full-disk encryption; no MDM; local PHI storage", "existing": "AC-19", "L": 3, "I": 4, "nist": "AC-19, SC-28, MP-6, IA-2", "iso": "8.1, 7.9, 8.24", "soc": "CC6.7", "strategy": "Mitigate", "actions": "Enforce full-disk encryption; MDM with remote wipe; block local PHI storage; screen lock", "owner": "IT Support Manager", "rL": 1, "rI": 4, "status": "Open — mitigating", "review": "Quarterly"}, {"id": "R-08", "risk": "Phishing leads to account takeover", "assets": "All users; ad-dc-01", "threat": "External attacker", "vuln": "No MFA; low user awareness; weak email filtering", "existing": "AT-2, IA-2", "L": 4, "I": 4, "nist": "IA-2(1), AT-2, SI-8, IR-4", "iso": "8.5, 6.3, 8.23", "soc": "CC6.1, CC7.3", "strategy": "Mitigate", "actions": "MFA everywhere; recurring phishing simulations; advanced email filtering; rapid IR playbook", "owner": "IT Security Lead", "rL": 2, "rI": 3, "status": "Open — mitigating", "review": "Quarterly"}, {"id": "R-09", "risk": "Misconfigured cloud storage exposes PHI backups publicly", "assets": "AWS S3 backup", "threat": "Misconfiguration / opportunistic scanner", "vuln": "Public bucket ACL; no config monitoring", "existing": "CM-6, AC-3", "L": 3, "I": 5, "nist": "CM-6, AC-3, SC-7, CA-7", "iso": "5.23, 8.9, 8.20", "soc": "CC6.1, CC6.6", "strategy": "Mitigate", "actions": "Block public access; enable CSPM; scan IaC; least-privilege bucket policies; alert on drift", "owner": "Cloud Engineer", "rL": 1, "rI": 5, "status": "Open — mitigating", "review": "Quarterly"}, {"id": "R-10", "risk": "Distributed denial-of-service takes the public service offline", "assets": "fw-edge-01; web-prod-01", "threat": "Hacktivist / botnet", "vuln": "No anti-DDoS; single ingress; no rate limiting", "existing": "SC-5, SC-7", "L": 3, "I": 3, "nist": "SC-5, SC-7, CP-2", "iso": "8.20, 8.6", "soc": "A1.1, A1.2", "strategy": "Mitigate", "actions": "CDN/anti-DDoS service; rate limiting; autoscaling; incident runbook", "owner": "Infrastructure Manager", "rL": 2, "rI": 2, "status": "Open — mitigating", "review": "Semi-annual"}, {"id": "R-11", "risk": "Known unpatched vulnerability exploited on a server", "assets": "web/app/db servers", "threat": "External attacker", "vuln": "Patch backlog; no SLA; slow scan cadence", "existing": "RA-5, SI-2", "L": 4, "I": 4, "nist": "RA-5, SI-2, CM-2", "iso": "8.8, 8.9", "soc": "CC7.1", "strategy": "Mitigate", "actions": "Vulnerability management program; risk-based patch SLA; authenticated scanning; KEV/EPSS triage", "owner": "Infrastructure Manager", "rL": 2, "rI": 3, "status": "Open — mitigating", "review": "Monthly"}, {"id": "R-12", "risk": "Backups fail or prove unrecoverable during an incident", "assets": "backup-01; AWS S3 backup", "threat": "Process failure", "vuln": "Backups untested; no monitoring; single copy", "existing": "CP-9", "L": 2, "I": 5, "nist": "CP-9, CP-10, CP-4", "iso": "8.13, 8.14", "soc": "A1.2, A1.3", "strategy": "Mitigate", "actions": "3-2-1 backup strategy; scheduled restore tests; backup job monitoring & alerting", "owner": "Infrastructure Manager", "rL": 1, "rI": 4, "status": "Open — mitigating", "review": "Quarterly"}, {"id": "R-13", "risk": "Weak Active Directory hardening enables lateral movement / domain compromise", "assets": "ad-dc-01", "threat": "Attacker post-foothold", "vuln": "Flat admin tiers; stale accounts; weak password policy", "existing": "AC-2, IA-5", "L": 3, "I": 5, "nist": "AC-2, AC-6, IA-5, CM-6", "iso": "8.2, 5.16, 5.17", "soc": "CC6.1, CC6.2, CC6.3", "strategy": "Mitigate", "actions": "Tiered admin model; LAPS; disable stale accounts; strong password/lockout policy; monitor DC events", "owner": "IT Security Lead", "rL": 2, "rI": 4, "status": "Open — mitigating", "review": "Quarterly"}, {"id": "R-14", "risk": "A breach goes undetected due to insufficient logging & monitoring", "assets": "siem-01 (coverage gaps); all systems", "threat": "Any attacker", "vuln": "Incomplete log sources; no alerting; short retention", "existing": "AU-2, SI-4", "L": 3, "I": 4, "nist": "AU-2, AU-6, AU-12, SI-4, IR-5", "iso": "8.15, 8.16", "soc": "CC7.2, CC7.3", "strategy": "Mitigate", "actions": "Onboard all log sources to SIEM; build detection use-cases & alerts; extend retention; 24x7 review", "owner": "SOC Analyst", "rL": 2, "rI": 3, "status": "Open — mitigating", "review": "Quarterly"}, {"id": "R-15", "risk": "Third-party / SaaS vendor compromise affects SDIS data", "assets": "External services / dependencies", "threat": "Supply-chain attacker", "vuln": "No vendor risk assessments; weak contracts; unknown SBOM", "existing": "SR-3, SA-9", "L": 3, "I": 4, "nist": "SR-3, SR-6, SA-9, PM-30", "iso": "5.19, 5.21, 5.22", "soc": "CC9.2", "strategy": "Mitigate", "actions": "Vendor risk assessments & tiering; security clauses & BAAs in contracts; SBOM review; continuous monitoring", "owner": "Vendor Risk Manager", "rL": 2, "rI": 3, "status": "Open — mitigating", "review": "Semi-annual"}, {"id": "R-16", "risk": "Excessive or orphaned privileges accumulate (no access reviews)", "assets": "All systems", "threat": "Insider / attacker", "vuln": "No periodic recertification; weak joiner-mover-leaver process", "existing": "AC-2, AC-6", "L": 3, "I": 4, "nist": "AC-2, AC-5, AC-6, AU-6", "iso": "5.18, 8.2", "soc": "CC6.2, CC6.3", "strategy": "Mitigate", "actions": "Quarterly access recertification; automated JML workflow; least privilege; log review", "owner": "IT Security Lead", "rL": 2, "rI": 3, "status": "Open — mitigating", "review": "Quarterly"}, {"id": "R-17", "risk": "No formal incident response — slow, chaotic breach handling", "assets": "Organization-wide", "threat": "Any", "vuln": "No IR plan; roles undefined; no breach-notification path", "existing": "IR-1, IR-4", "L": 3, "I": 4, "nist": "IR-1, IR-4, IR-6, IR-8", "iso": "5.24, 5.26, 6.8", "soc": "CC7.3, CC7.4, CC7.5", "strategy": "Mitigate", "actions": "Adopt IR plan & playbooks; assign roles; run tabletops; define HIPAA breach-notification workflow", "owner": "IT Security Lead", "rL": 2, "rI": 3, "status": "Open — mitigating", "review": "Quarterly"}, {"id": "R-18", "risk": "Non-compliance with HIPAA / regulatory obligations", "assets": "Organization-wide", "threat": "Regulatory / legal", "vuln": "No compliance program; gaps in risk assessment; missing BAAs", "existing": "PL-2, RA-3", "L": 3, "I": 5, "nist": "PL-2, RA-3, CA-2, PM-9", "iso": "5.31, 5.34, 5.36", "soc": "CC2.3, CC3.1", "strategy": "Mitigate", "actions": "Stand up compliance program; annual risk assessments; execute BAAs; policy framework & evidence", "owner": "Compliance Officer", "rL": 2, "rI": 4, "status": "Open — mitigating", "review": "Semi-annual"}, {"id": "R-19", "risk": "Unauthorized physical access to hosting / office environment", "assets": "Data center / office; admin-ws-01", "threat": "Intruder / tailgater", "vuln": "Weak badge control; no visitor logs; limited monitoring", "existing": "PE-3, PE-6", "L": 2, "I": 4, "nist": "PE-2, PE-3, PE-6", "iso": "7.1, 7.2, 7.4", "soc": "CC6.4, CC6.5", "strategy": "Mitigate", "actions": "Badge access + anti-tailgating; visitor logging; CCTV monitoring; clear-desk policy", "owner": "Facilities / IT", "rL": 1, "rI": 4, "status": "Open — mitigating", "review": "Annual"}, {"id": "R-20", "risk": "Flat network with weak segmentation lets attacks spread", "assets": "Internal network; all servers", "threat": "Attacker post-foothold", "vuln": "Minimal segmentation; permissive firewall rules", "existing": "SC-7, AC-4", "L": 3, "I": 4, "nist": "SC-7, AC-4, CA-9", "iso": "8.20, 8.22, 8.23", "soc": "CC6.1, CC6.6", "strategy": "Mitigate", "actions": "Segment network by zone/tier; tighten firewall rules; periodic rule review; move toward zero-trust", "owner": "Network Engineer", "rL": 2, "rI": 3, "status": "Open — mitigating", "review": "Quarterly"}];
+const band=s=>s>=15?'Critical':s>=10?'High':s>=5?'Medium':'Low';
+const cls=b=>({Critical:'b-crit',High:'b-high',Medium:'b-med',Low:'b-low'})[b];
+R.forEach(r=>{r.inh=r.L*r.I;r.res=r.rL*r.rI;r.ib=band(r.inh);r.rb=band(r.res);
+ r.text=[r.id,r.risk,r.assets,r.threat,r.vuln,r.existing,r.nist,r.iso,r.soc,r.actions,r.owner].join(' ').toLowerCase()});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+let view='inh',cell=null,sortK='id',sortD=1,openId=null;
+const $=id=>document.getElementById(id);
+
+// KPIs
+(function(){
+ const ci=R.filter(r=>r.ib==='Critical').length,cr=R.filter(r=>r.rb==='Critical').length;
+ const hi=R.filter(r=>r.inh>=10).length,hr=R.filter(r=>r.res>=10).length;
+ const si=R.reduce((a,r)=>a+r.inh,0),sr=R.reduce((a,r)=>a+r.res,0);
+ const ctl=new Set();R.forEach(r=>r.nist.split(',').forEach(c=>ctl.add(c.trim().replace(/\(.*\)/,''))));
+ $('kpis').innerHTML=`
+ <div class="kpi"><b>${R.length}</b><span>risks assessed across 3 frameworks</span></div>
+ <div class="kpi"><b>${ci} <span class="arrow">→</span> ${cr}</b><span>Critical risks, before → after treatment</span></div>
+ <div class="kpi"><b>${hi} <span class="arrow">→</span> ${hr}</b><span>High or Critical, before → after</span></div>
+ <div class="kpi"><b>${Math.round((1-sr/si)*100)}%</b><span>reduction in total risk score · ${ctl.size} NIST controls mapped</span></div>`;
+})();
+// owners
+[...new Set(R.map(r=>r.owner))].sort().forEach(o=>$('fo').insertAdjacentHTML('beforeend',`<option>${esc(o)}</option>`));
+
+function heat(){
+ const h=$('hm');let html='';
+ for(let L=5;L>=1;L--){html+=`<div class="ax">${L}</div>`;
+  for(let I=1;I<=5;I++){
+   const n=R.filter(r=>view==='inh'?(r.L===L&&r.I===I):(r.rL===L&&r.rI===I)).length;
+   const sel=cell&&cell[0]===L&&cell[1]===I;
+   html+=`<div class="c ${cls(band(L*I))} ${n?'':'z'} ${sel?'sel':''}" data-l="${L}" data-i="${I}" title="Likelihood ${L} × Impact ${I} = ${L*I} (${band(L*I)}) · ${n} risk${n===1?'':'s'}" ${n?'tabindex="0" role="button"':''}>${n||'·'}</div>`}}
+ html+='<div></div>'+[1,2,3,4,5].map(i=>`<div class="ax">${i}</div>`).join('');
+ h.innerHTML=html;
+ const bands=['Critical','High','Medium','Low'];
+ $('bars').innerHTML='<h2 style="font-size:13px;margin:0 0 4px">Risks by band ('+(view==='inh'?'inherent':'residual')+')</h2>'+bands.map(b=>{const n=R.filter(r=>(view==='inh'?r.ib:r.rb)===b).length;
+  return `<div class="bar"><span>${b}</span><span class="t"><i class="${cls(b)}" style="width:${n/R.length*100}%;background:currentColor"></i></span><b>${n}</b></div>`}).join('');
+}
+$('hm').addEventListener('click',e=>{const c=e.target.closest('.c:not(.z)');if(!c)return;
+ const k=[+c.dataset.l,+c.dataset.i];cell=(cell&&cell[0]===k[0]&&cell[1]===k[1])?null:k;heat();table()});
+$('hm').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.target.click()}});
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{view=b.dataset.v;cell=null;
+ document.querySelectorAll('.seg button').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-selected',x===b)});heat();table()});
+
+function rows(){
+ const q=$('q').value.trim().toLowerCase(),fr=$('fr').value,fo=$('fo').value;
+ let a=R.filter(r=>(!q||r.text.includes(q))&&(!fr||r.ib===fr)&&(!fo||r.owner===fo)&&
+  (!cell||(view==='inh'?(r.L===cell[0]&&r.I===cell[1]):(r.rL===cell[0]&&r.rI===cell[1]))));
+ a.sort((x,y)=>{const u=x[sortK],v=y[sortK];return (typeof u==='number'?u-v:String(u).localeCompare(String(v),undefined,{numeric:true}))*sortD});
+ $('clr').hidden=!(q||fr||fo||cell);return a;
+}
+const chips=(s,n)=>`<div class="ctl ${n?'n':''}">${s.split(',').map(c=>`<span>${esc(c.trim())}</span>`).join('')}</div>`;
+function table(){
+ const a=rows();
+ $('tb').innerHTML=a.length?a.map(r=>`
+  <tr data-id="${r.id}" class="${openId===r.id?'open':''}" tabindex="0" aria-expanded="${openId===r.id}">
+   <td class="rid" data-l="ID">${r.id}</td><td data-l="Risk">${esc(r.risk)}</td>
+   <td data-l="Inherent" class="mv"><span class="pill ${cls(r.ib)}">${r.inh} ${r.ib}</span></td>
+   <td data-l="Residual" class="mv"><span class="pill ${cls(r.rb)}">${r.res} ${r.rb}</span></td>
+   <td data-l="Owner">${esc(r.owner)}</td><td data-l="Review">${esc(r.review)}</td></tr>
+  ${openId===r.id?`<tr class="detail"><td colspan="6"><div class="dgrid">
+   <div><h4>Asset(s) affected</h4><p>${esc(r.assets)}</p></div>
+   <div><h4>Threat source</h4><p>${esc(r.threat)}</p></div>
+   <div><h4>Vulnerability / weakness</h4><p>${esc(r.vuln)}</p></div>
+   <div><h4>Existing controls</h4>${chips(r.existing)}</div>
+   <div><h4>Score movement</h4><p>Likelihood ${r.L} × Impact ${r.I} = <b>${r.inh}</b> → ${r.rL} × ${r.rI} = <b>${r.res}</b> &nbsp;(<b>${Math.round((1-r.res/r.inh)*100)}%</b> lower)</p></div>
+   <div><h4>Treatment · ${esc(r.strategy)} · ${esc(r.status)}</h4><ul class="act">${r.actions.split(';').map(x=>`<li>${esc(x.trim())}</li>`).join('')}</ul></div>
+   <div><h4>NIST SP 800-53 Rev 5</h4>${chips(r.nist,1)}</div>
+   <div><h4>ISO/IEC 27001:2022 Annex A</h4>${chips(r.iso.split(',').map(x=>'A.'+x.trim()).join(','))}</div>
+   <div><h4>SOC 2 Trust Services Criteria</h4>${chips(r.soc)}</div>
+  </div></td></tr>`:''}`).join(''):'<tr><td colspan="6" class="empty">No risks match these filters.</td></tr>';
+}
+$('tb').addEventListener('click',e=>{const tr=e.target.closest('tr[data-id]');if(!tr)return;openId=openId===tr.dataset.id?null:tr.dataset.id;table()});
+$('tb').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('tr[data-id]')){e.preventDefault();e.target.click()}});
+document.querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{const k=th.dataset.k;sortD=sortK===k?-sortD:(k==='inh'||k==='res'?-1:1);sortK=k;
+ document.querySelectorAll('th').forEach(t=>t.removeAttribute('aria-sort'));th.setAttribute('aria-sort',sortD>0?'ascending':'descending');table()});
+['q','fr','fo'].forEach(i=>$(i).addEventListener('input',table));
+$('clr').onclick=()=>{$('q').value='';$('fr').value='';$('fo').value='';cell=null;heat();table()};
+heat();table();
+</script>
+</body>
+</html>
