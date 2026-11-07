@@ -14,8 +14,8 @@ I'm comfortable with frameworks and with findings, and I translate between the t
 
 ## Skills
 
-**Frameworks:** Risk Assessment · Control Mapping · Evidence Collection · Audit Readiness · Technical Writing · SSP Development · Continuous Monitoring · Remediation Tracking & SLA Management · False-Positive Validation · Risk Exception Management · Patch Coordination · VM Metrics & Reporting · Policy & Procedure Writing · Risk-Based Prioritization (CVSS, EPSS, CISA KEV) · POA&M Management · Third-Party / Vendor Risk · Risk Register Management · Vulnerability Scanning  
-**Tools & platforms:** ServiceNow GRC · Power BI · AWS · Vanta · Tenable / Nessus · Splunk · Microsoft Sentinel · Qualys VMDR · AWS Security Hub · Excel (advanced) · Microsoft Defender for Cloud · Jira  
+**Frameworks:** Risk Assessment · Control Mapping · Evidence Collection · Audit Readiness · Technical Writing · SSP Development · Continuous Monitoring · Remediation Tracking & SLA Management · False-Positive Validation · Risk Exception Management · Patch Coordination · VM Metrics & Reporting · Policy & Procedure Writing · Risk-Based Prioritization (CVSS, EPSS, CISA KEV) · POA&M Management · Third-Party / Vendor Risk · Risk Register Management · Vulnerability Scanning · Log Analysis · Risk-Based Prioritization (CVSS, EPSS, CISA KEV)  
+**Tools & platforms:** ServiceNow GRC · Power BI · AWS · Vanta · Tenable / Nessus · Splunk · Microsoft Sentinel · Qualys VMDR · AWS Security Hub · Excel (advanced) · Microsoft Defender for Cloud · Jira · Wiz · Aqua Security · Qualys  
 **Strengths:** Project Coordination · Process Documentation · Training & Coaching · Customer Service · Working Under Pressure · Stakeholder Communication · Attention to Detail
 
 ## Certifications
@@ -24,6 +24,7 @@ I'm comfortable with frameworks and with findings, and I translate between the t
 - ISC2 Certified in Cybersecurity (CC) · ISC2 (Mar 2026) · Earned
 - CompTIA CySA+ · CompTIA (Sep 2026) · Earned
 - CISA · ISACA (Jan 2027) · In progress
+- CISSP · ISC2 (Jul 2026) · Earned
 
 ## Projects
 
@@ -37,6 +38,7 @@ I'm comfortable with frameworks and with findings, and I translate between the t
 - **Earned CompTIA Security+** · Jun 2026 — Issued by CompTIA.
 - **Earned ISC2 Certified in Cybersecurity (CC)** · Mar 2026 — Issued by ISC2.
 - **Earned CompTIA CySA+** · Sep 2026 — Issued by CompTIA.
+- **Earned CISSP** · Jul 2026 — Issued by ISC2.
 - **Completed: System Security Plan (SSP) — Moderate Baseline** · Risk Management — Developed a full SSP for a fictional patient portal at Lakeshore Health Partners. I categorized the system as Moderate under FIPS 199, selec
 - **Completed: Vulnerability Scan Analysis & Remediation Plan** · Vulnerability Management — Analyzed a Nessus scan of 120 fictional assets at Midwest Freight Logistics (1,400+ findings). I removed duplicates and false positives, the
 - **Completed: SDIS Risk Assessment & Risk Register (Healthcare SaaS)** · Risk Management — Assessed 20 risks for SDIS, a fictional moderate-impact healthcare SaaS platform that handles PHI. For each risk I identified the affected a
