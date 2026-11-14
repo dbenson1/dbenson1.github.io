@@ -17,6 +17,7 @@ An SSP is only as strong as its evidence. Writing implementation statements that
 ## Deliverables
 
 - [SSP_Template.docx](SSP_Template.docx)
+- [SDIS-AT-Awareness-and-Training-Policy.docx](SDIS-AT-Awareness-and-Training-Policy.docx)
 
 ---
 *Fictional organization and sanitized data only.*

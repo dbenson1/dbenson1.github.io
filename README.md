@@ -14,8 +14,8 @@ I'm comfortable with frameworks and with findings, and I translate between the t
 
 ## Skills
 
-**Frameworks:** Risk Assessment · Control Mapping · Evidence Collection · Audit Readiness · Technical Writing · SSP Development · Continuous Monitoring · Remediation Tracking & SLA Management · False-Positive Validation · Risk Exception Management · Patch Coordination · VM Metrics & Reporting · Policy & Procedure Writing · Risk-Based Prioritization (CVSS, EPSS, CISA KEV) · POA&M Management · Third-Party / Vendor Risk · Risk Register Management · Vulnerability Scanning · Log Analysis · Risk-Based Prioritization (CVSS, EPSS, CISA KEV)  
-**Tools & platforms:** ServiceNow GRC · Power BI · AWS · Vanta · Tenable / Nessus · Splunk · Microsoft Sentinel · Qualys VMDR · AWS Security Hub · Excel (advanced) · Microsoft Defender for Cloud · Jira · Wiz · Aqua Security · Qualys  
+**Frameworks:** Risk Assessment · Control Mapping · Evidence Collection · Audit Readiness · Technical Writing · SSP Development · Continuous Monitoring · Remediation Tracking & SLA Management · False-Positive Validation · Risk Exception Management · Patch Coordination · VM Metrics & Reporting · Policy & Procedure Writing · Risk-Based Prioritization (CVSS, EPSS, CISA KEV) · POA&M Management · Third-Party / Vendor Risk · Risk Register Management · Vulnerability Scanning · Log Analysis · Risk-Based Prioritization (CVSS, EPSS, CISA KEV) · Vulnerability Triage & Prioritization · ARTIFICIAL INTELIGENCE · Remediation Planning  
+**Tools & platforms:** ServiceNow GRC · Power BI · AWS · Vanta · Tenable / Nessus · Splunk · Microsoft Sentinel · Qualys VMDR · AWS Security Hub · Excel (advanced) · Microsoft Defender for Cloud · Jira · Wiz · Aqua Security · Qualys · Qualys VMDR  
 **Strengths:** Project Coordination · Process Documentation · Training & Coaching · Customer Service · Working Under Pressure · Stakeholder Communication · Attention to Detail
 
 ## Certifications
@@ -25,6 +25,7 @@ I'm comfortable with frameworks and with findings, and I translate between the t
 - CompTIA CySA+ · CompTIA (Sep 2026) · Earned
 - CISA · ISACA (Jan 2027) · In progress
 - CISSP · ISC2 (Jul 2026) · Earned
+- AAISM · ISACA (Dec 2026) · In progress
 
 ## Projects
 
